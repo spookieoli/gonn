@@ -19,3 +19,5 @@ func Test4() {
 func Test5() {
 	println("test5")
 }
+
+// Path: main_test.go
