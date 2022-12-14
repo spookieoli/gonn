@@ -15,3 +15,7 @@ func Test3() {
 func Test4() {
 	println("test4")
 }
+
+func Test5() {
+	println("test5")
+}
