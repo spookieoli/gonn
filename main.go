@@ -20,4 +20,4 @@ func Test5() {
 	println("test5")
 }
 
-// Path: main_test.go c2
+// Path: main_test.go c3
