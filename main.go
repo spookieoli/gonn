@@ -7,3 +7,7 @@ func Test() {
 func Test2() {
 	println("test2")
 }
+
+func Test3() {
+	println("test3")
+}
