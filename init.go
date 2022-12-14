@@ -10,5 +10,9 @@ type Gonn struct {
 // Create a new Gonn instance
 func New(lc *[]utils.LayerConfig) *Gonn {
 	// Create the Layers
+	for _, layer := range *lc {
+		switch layer.LayerType {
+			// TBD
+	}
 	return &Gonn{}
 }
