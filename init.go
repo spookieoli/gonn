@@ -8,11 +8,12 @@ type Gonn struct {
 }
 
 // Create a new Gonn instance
-func New(lc *[]utils.LayerConfig) *Gonn {
+func New(lc *[]utils.Layer) *Gonn {
 	// Create the Layers
 	for _, layer := range *lc {
-		switch layer.LayerType {
-			// TBD
+		switch layer {
+		// TBD
+		}
 	}
 	return &Gonn{}
 }

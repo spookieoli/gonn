@@ -8,15 +8,7 @@ type Layer interface {
 	UseBias() bool            // Check if the layer uses bias
 	DropOut() float64         // Get the dropout rate of the layer
 	GetBias() *[]float64      // Get the bias of the layer - this is normally a 1x1 matrix or one value
+	Save(string)              // Save the layer Model
+	Load(string)              // Load the layer Model
 	// TBC
-}
-
-// LayerConfig is a struct that holds the configuration for a layer
-type LayerConfig struct {
-	LayerType  *Layer
-	Neurons    int64
-	Activation func(any) any
-	Bias       bool
-	Name       string
-	DropOut    float64
 }
