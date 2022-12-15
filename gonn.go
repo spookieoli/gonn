@@ -34,3 +34,8 @@ func (g *Gonn) Save(path string) error {
 func (g *Gonn) Load(path string) error {
 	return nil
 }
+
+// Predict the output of the model
+func (g *Gonn) Predict() error {
+	return nil
+}
