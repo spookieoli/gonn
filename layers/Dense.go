@@ -17,6 +17,17 @@ type Dense struct {
 	UsesBias bool
 }
 
+// Create new Dense Layer and return it
+func NewDense(neurons int64, activation func(any) any, bias bool, name string, dropout float64) *Dense {
+	return &Dense{
+		Neurons:    neurons,
+		Activation: activation,
+		UsesBias:   bias,
+		Name:       name,
+		DropOut:    dropout,
+	}
+}
+
 // ForwardPropagate - Forward propagate the input through the layer
 func (d *Dense) Compute() *[]float64 {
 	// TBD
