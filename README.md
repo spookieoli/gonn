@@ -11,6 +11,7 @@ Project Objectives:
 * Models can be loaded (model.load())
 * Advanced layers like CONV, GRU..
 * Production readiness :)
+* 100% Go
 
 Examples:
 
