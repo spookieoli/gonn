@@ -1,6 +1,7 @@
 package gonn
 
 import (
+	"github.com/spookieoli/gonn/layers"
 	"github.com/spookieoli/gonn/utils"
 )
 
@@ -8,6 +9,20 @@ import (
 type Gonn struct {
 	// Layers is a slice of layers
 	Layers *[]utils.Layer
+}
+
+// Set the Inputs field of the layers
+func (g *Gonn) SetInputs(lc *[]utils.LayerConfig) {
+	for i := range *lc {
+		switch (*lc)[i].LayerType.(type) {
+		case *layers.Input:
+			continue
+		default:
+			if (*lc)[i].Inputs == 0 {
+				(*lc)[i].Inputs = ((*lc)[i-1]).Neurons
+			}
+		}
+	}
 }
 
 // Save a model to a file

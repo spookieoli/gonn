@@ -18,7 +18,19 @@ type Dense struct {
 }
 
 // Create new Dense Layer and return it
-func NewDense(neurons int64, activation func(any) any, bias bool, name string, dropout float64) *Dense {
+func NewDense(neurons int64, activation func(any) any, bias bool, name string, dropout float64, neuronsbefore int64) *Dense {
+	// if bias is true we have to increase the number of neurons by 1
+	if bias {
+		neurons++
+	}
+
+	// Create the Weights
+	weights := make([][]float64, neurons)
+	for i := range weights {
+		weights[i] = make([]float64, neuronsbefore)
+	}
+
+	// Return the new Dense Layer
 	return &Dense{
 		Neurons:    neurons,
 		Activation: activation,

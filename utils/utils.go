@@ -15,6 +15,7 @@ type Layer interface {
 type LayerConfig struct {
 	LayerType  Layer
 	Neurons    int64
+	Inputs     int64 // Inputs is optional - if not set it will be set to the number of neurons of the previous layer
 	Activation func(any) any
 	Bias       bool
 	Name       string
