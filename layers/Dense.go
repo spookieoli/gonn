@@ -47,13 +47,3 @@ func (d *Dense) GetBias() *[]float64 {
 func (d *Dense) UseBias() bool {
 	return d.UsesBias
 }
-
-// Save the Neural Network Model
-func (d *Dense) Save(path string) {
-	// TBD
-}
-
-// Load the Neural Network Model
-func (d *Dense) Load(path string) {
-	// TBD
-}
