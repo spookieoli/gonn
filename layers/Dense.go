@@ -14,5 +14,46 @@ type Dense struct {
 	// DropOut is the dropout rate of the layer
 	DropOut float64
 	// UseBias is a boolean that tells if the layer uses bias
-	UseBias bool
+	UsesBias bool
+}
+
+// ForwardPropagate - Forward propagate the input through the layer
+func (d *Dense) Compute() *[]float64 {
+	// TBD
+	return nil
+}
+
+// Get all the weights of the layer
+func (d *Dense) GetWeights() *[][]float64 {
+	return d.Weights
+}
+
+// Get the Name of the layer
+func (d *Dense) GetName() string {
+	return d.Name
+}
+
+// Get the dropout rate of the layer
+func (d *Dense) GetDropOut() float64 {
+	return d.DropOut
+}
+
+// Get the bias of the layer
+func (d *Dense) GetBias() *[]float64 {
+	return d.Bias
+}
+
+// Check if the layer uses bias
+func (d *Dense) UseBias() bool {
+	return d.UsesBias
+}
+
+// Save the Neural Network Model
+func (d *Dense) Save(path string) {
+	// TBD
+}
+
+// Load the Neural Network Model
+func (d *Dense) Load(path string) {
+	// TBD
 }
