@@ -36,10 +36,7 @@ func (g *Gonn) SetInputs(lc *[]utils.LayerConfig) {
 // Check if the first Layer is an Input Layer
 func (g *Gonn) CheckInput() bool {
 	typeLayer := fmt.Sprintf("%T", (*g.NN.Layers)[0])
-	if typeLayer == "*layers.Input" {
-		return true
-	}
-	return false
+	return typeLayer == "*layers.Input"
 }
 
 // Save a model to a file
