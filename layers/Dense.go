@@ -1,5 +1,7 @@
 package layers
 
+import "github.com/spookieoli/gonn/utils"
+
 type Dense struct {
 	// Weights is a 2D matrix of weights
 	Weights *[][]float64
@@ -15,10 +17,12 @@ type Dense struct {
 	DropOut float64
 	// UseBias is a boolean that tells if the layer uses bias
 	UsesBias bool
+	// Outputs
+	Outputs *[]float64
 }
 
 // Create new Dense Layer and return it
-func NewDense(neurons int64, activation func(any) any, bias bool, name string, dropout float64, neuronsbefore int64) *Dense {
+func NewDense(neurons int64, activation func(any) any, bias bool, name string, dropout float64, lb *utils.Layer) *Dense {
 	// if bias is true we have to increase the number of neurons by 1
 	if bias {
 		neurons++
@@ -27,7 +31,7 @@ func NewDense(neurons int64, activation func(any) any, bias bool, name string, d
 	// Create the Weights
 	weights := make([][]float64, neurons)
 	for i := range weights {
-		weights[i] = make([]float64, neuronsbefore)
+		weights[i] = make([]float64, (*lb).GetNeuronCount())
 	}
 
 	// Return the new Dense Layer
@@ -41,9 +45,9 @@ func NewDense(neurons int64, activation func(any) any, bias bool, name string, d
 }
 
 // ForwardPropagate - Forward propagate the input through the layer
-func (d *Dense) Compute() *[]float64 {
+func (d *Dense) Compute() {
 	// TBD
-	return nil
+	return
 }
 
 // Get all the weights of the layer
@@ -69,4 +73,14 @@ func (d *Dense) GetBias() *[]float64 {
 // Check if the layer uses bias
 func (d *Dense) UseBias() bool {
 	return d.UsesBias
+}
+
+// Get the Outputs of the layer
+func (d *Dense) GetOutputs() any {
+	return d.Outputs
+}
+
+// Get the number of neurons in the layer
+func (d *Dense) GetNeuronCount() int64 {
+	return d.Neurons
 }

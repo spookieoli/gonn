@@ -13,9 +13,9 @@ func NewInput(neurons int64) *Input {
 }
 
 // ForwardPropagate - Forward propagate the input through the layer
-func (d *Input) Compute() *[]float64 {
-	// TBD
-	return nil
+func (d *Input) Compute() {
+	// Is a Placeholder
+	return
 }
 
 // Get all the weights of the layer
@@ -41,4 +41,14 @@ func (d *Input) GetBias() *[]float64 {
 // Check if the layer uses bias
 func (d *Input) UseBias() bool {
 	return false
+}
+
+// Get the Outputs of the layer
+func (d *Input) GetOutputs() any {
+	return nil
+}
+
+// Get the number of neurons in the layer
+func (d *Input) GetNeuronCount() int64 {
+	return d.Neurons
 }

@@ -1,6 +1,8 @@
 package gonn
 
 import (
+	"fmt"
+
 	"github.com/spookieoli/gonn/layers"
 	"github.com/spookieoli/gonn/utils"
 )
@@ -8,7 +10,8 @@ import (
 // Gonn is the main struct of the library
 type Gonn struct {
 	// Layers is a slice of layers
-	Layers *[]utils.Layer
+	NN   *utils.NeuralNetwork
+	Name string
 }
 
 // Set the Inputs field of the layers
@@ -17,12 +20,26 @@ func (g *Gonn) SetInputs(lc *[]utils.LayerConfig) {
 		switch (*lc)[i].LayerType.(type) {
 		case *layers.Input:
 			continue
+		// TODO: What in case of a Concat layer?
 		default:
 			if (*lc)[i].Inputs == 0 {
-				(*lc)[i].Inputs = ((*lc)[i-1]).Neurons
+				if (*lc)[i-1].Bias {
+					(*lc)[i].Inputs = ((*lc)[i-1]).Neurons + 1
+				} else {
+					(*lc)[i].Inputs = ((*lc)[i-1]).Neurons
+				}
 			}
 		}
 	}
+}
+
+// Check if the first Layer is an Input Layer
+func (g *Gonn) CheckInput() bool {
+	typeLayer := fmt.Sprintf("%T", (*g.NN.Layers)[0])
+	if typeLayer == "*layers.Input" {
+		return true
+	}
+	return false
 }
 
 // Save a model to a file
