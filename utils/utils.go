@@ -54,3 +54,10 @@ type NeuralNetwork struct {
 	Com     chan Payload
 	Threads int
 }
+
+// This is the Work Function which will Computer several different Functions if the Payload is sent to the Com channel
+func Work(c chan Payload) {
+	for u := range c {
+		u.Fun(u.Arg)
+	}
+}

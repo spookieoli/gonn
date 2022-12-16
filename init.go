@@ -7,7 +7,16 @@ import (
 
 // Create a new Gonn instance
 func New(lc *[]utils.LayerConfig, threads int, name string) *Gonn {
-	gonn := &Gonn{NN: &utils.NeuralNetwork{Threads: threads}, Name: name}
+	// create the Channel for the Compution
+	com := make(chan utils.Payload)
+	// Start the Threads for the Compution
+	for i := 0; i < threads; i++ {
+		go utils.Work(com)
+	}
+	// Create the Neural Network
+	nn := &utils.NeuralNetwork{Threads: threads, Com: com}
+	// Create the Gonn Instance
+	gonn := &Gonn{NN: nn, Name: name}
 	// Check if the first layer is an Input layer
 	if !gonn.CheckInput() {
 		panic("Your first layer must be an Input layer")
