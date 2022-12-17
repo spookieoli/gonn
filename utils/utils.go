@@ -15,13 +15,14 @@ type Layer interface {
 
 // LayerConfig is a struct that holds the configuration for a layer
 type LayerConfig struct {
-	LayerType  Layer
-	Neurons    int64
-	Inputs     int64 // Inputs is optional - if not set it will be set to the number of neurons of the previous layer
-	Activation func(any) any
-	Bias       bool
-	Name       string
-	DropOut    float64
+	LayerType      Layer
+	Neurons        int64
+	Inputs         int64 // Inputs is optional - if not set it will be set to the number of neurons of the previous layer
+	Activation     func(any) any
+	Bias           bool
+	Name           string
+	DropOut        float64
+	InputLayerName string // The Name of the Layer delivering Data to the actual Layer, if empty it will be set to the name of the previous layer
 }
 
 // Struct to control the Training of the Model
