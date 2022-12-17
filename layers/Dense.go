@@ -19,6 +19,10 @@ type Dense struct {
 	UsesBias bool
 	// Outputs
 	Outputs *[]float64
+	// The Name of the Inputlayer
+	InputLayername string
+	// Layer that delivers Data to this Layer
+	InputLayer *utils.Layer
 }
 
 // Create new Dense Layer and return it
@@ -26,12 +30,6 @@ func NewDense(neurons int64, activation func(any) any, bias bool, name string, d
 	// if bias is true we have to increase the number of neurons by 1
 	if bias {
 		neurons++
-	}
-
-	// Create the Weights
-	weights := make([][]float64, neurons)
-	for i := range weights {
-		weights[i] = make([]float64, (*lb).GetNeuronCount())
 	}
 
 	// Return the new Dense Layer
@@ -42,6 +40,16 @@ func NewDense(neurons int64, activation func(any) any, bias bool, name string, d
 		Name:       name,
 		DropOut:    dropout,
 	}
+}
+
+// Set the Weights of every Neuron in the Layer
+func (d *Dense) InitWeights() {
+	// Create the Weights
+	weights := make([][]float64, d.Neurons)
+	for i := range weights {
+		weights[i] = make([]float64, (*d.InputLayer).GetNeuronCount())
+	}
+	// TODO: fill with random Numbers
 }
 
 // ForwardPropagate - Forward propagate the input through the layer
@@ -83,4 +91,19 @@ func (d *Dense) GetOutputs() any {
 // Get the number of neurons in the layer
 func (d *Dense) GetNeuronCount() int64 {
 	return d.Neurons
+}
+
+// Set the Name of the Layer
+func (d *Dense) SetName(name string) {
+	d.Name = name
+}
+
+// Set the InputLayer
+func (d *Dense) SetInputLayer(l *utils.Layer) {
+	d.InputLayer = l
+}
+
+// Get the InputLayername
+func (d *Dense) GetInputLayername() string {
+	return d.InputLayername
 }

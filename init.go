@@ -37,5 +37,10 @@ func New(lc *[]utils.LayerConfig, threads int, name string) *Gonn {
 			*gonn.NN.Layers = append(*gonn.NN.Layers, layers.NewDense(layer.Neurons, layer.Activation, layer.Bias, layer.Name, layer.DropOut, &(*gonn.NN.Layers)[idx-1]))
 		}
 	}
+	// Set the right Inputs for every Layer
+	gonn.SetInputs()
+	// Init all the Weights
+	gonn.CreateWeights()
+	// Return to Caller
 	return gonn
 }

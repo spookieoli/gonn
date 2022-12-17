@@ -10,6 +10,10 @@ type Layer interface {
 	GetBias() *[]float64      // Get the bias of the layer - this is normally a 1x1 matrix or one value
 	GetOutputs() any          // Get the outputs of the layer
 	GetNeuronCount() int64    // Get the number of neurons of the layer
+	SetName(string)           // Set the Name of the Layer
+	SetInputLayer(*Layer)
+	GetInputLayername() string // Get the Name of the Data delivering Layer
+	InitWeights()
 	// TBC
 }
 
