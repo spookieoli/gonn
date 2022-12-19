@@ -21,20 +21,15 @@ func New(lc *[]utils.LayerConfig, threads int, name string) *Gonn {
 	// Create the Gonn Instance
 	gonn := &Gonn{NN: nn, Name: name}
 
-	// Check if the first layer is an Input layer - subject to change
-	if !gonn.CheckInput() {
-		panic("Your first layer must be an Input layer")
-	}
-
 	// Create the Layers
 	for idx, layer := range *lc {
 		switch layer.LayerType.(type) {
 		case *layers.Input:
 			// Create a new Input layer
-			*gonn.NN.Layers = append(*gonn.NN.Layers, layers.NewInput(layer.Neurons))
+			*gonn.NN.Layers = append(*gonn.NN.Layers, layers.NewInput(layer.Neurons, com))
 		case *layers.Dense:
 			// Create a new Dense layer
-			*gonn.NN.Layers = append(*gonn.NN.Layers, layers.NewDense(layer.Neurons, layer.Activation, layer.Bias, layer.Name, layer.DropOut, &(*gonn.NN.Layers)[idx-1]))
+			*gonn.NN.Layers = append(*gonn.NN.Layers, layers.NewDense(layer.Neurons, layer.Activation, layer.Bias, layer.Name, layer.DropOut, &(*gonn.NN.Layers)[idx-1], com))
 		}
 	}
 	// Set the right Inputs for every Layer

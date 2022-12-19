@@ -23,10 +23,12 @@ type Dense struct {
 	InputLayername string
 	// Layer that delivers Data to this Layer
 	InputLayer *utils.Layer
+	// The Communication Channel
+	Com chan utils.Payload
 }
 
 // Create new Dense Layer and return it
-func NewDense(neurons int64, activation func(any) any, bias bool, name string, dropout float64, lb *utils.Layer) *Dense {
+func NewDense(neurons int64, activation func(any) any, bias bool, name string, dropout float64, lb *utils.Layer, com chan utils.Payload) *Dense {
 	// if bias is true we have to increase the number of neurons by 1
 	if bias {
 		neurons++
@@ -39,6 +41,7 @@ func NewDense(neurons int64, activation func(any) any, bias bool, name string, d
 		UsesBias:   bias,
 		Name:       name,
 		DropOut:    dropout,
+		Com:        com,
 	}
 }
 

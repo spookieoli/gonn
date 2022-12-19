@@ -6,12 +6,15 @@ import "github.com/spookieoli/gonn/utils"
 type Input struct {
 	Neurons int64 // In Input these are the inputs (data points)
 	Name    string
+	// The Communication Channel
+	Com chan utils.Payload
 }
 
 // Create new Input Layer and return it
-func NewInput(neurons int64) *Input {
+func NewInput(neurons int64, com chan utils.Payload) *Input {
 	return &Input{
 		Neurons: neurons,
+		Com:     com,
 	}
 }
 
