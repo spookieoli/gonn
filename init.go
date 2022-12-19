@@ -29,7 +29,8 @@ func New(lc *[]utils.LayerConfig, threads int, name string) *Gonn {
 			*gonn.NN.Layers = append(*gonn.NN.Layers, layers.NewInput(layer.Neurons, com))
 		case *layers.Dense:
 			// Create a new Dense layer
-			*gonn.NN.Layers = append(*gonn.NN.Layers, layers.NewDense(layer.Neurons, layer.Activation, layer.Bias, layer.Name, layer.DropOut, &(*gonn.NN.Layers)[idx-1], com))
+			*gonn.NN.Layers = append(*gonn.NN.Layers, layers.NewDense(layer.Neurons, layer.Activation, layer.Bias, layer.Name,
+				layer.DropOut, &(*gonn.NN.Layers)[idx-1], com))
 		}
 	}
 	// Set the right Inputs for every Layer

@@ -53,7 +53,7 @@ type Payload struct {
 	Arg any
 }
 
-// Struct for the Neural Network
+// Struct for the Neural Network - TODO: There should be a function that applys one Neural network to another
 type NeuralNetwork struct {
 	Layers  *[]Layer
 	Com     chan Payload
