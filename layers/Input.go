@@ -18,12 +18,6 @@ func NewInput(neurons int64, com chan utils.Payload) *Input {
 	}
 }
 
-// ForwardPropagate - Forward propagate the input through the layer
-func (d *Input) Compute() {
-	// Is a Placeholder
-	return
-}
-
 // Get all the weights of the layer
 func (d *Input) GetWeights() *[][]float64 {
 	return &[][]float64{}

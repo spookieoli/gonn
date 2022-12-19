@@ -17,8 +17,6 @@ type Dense struct {
 	DropOut float64
 	// UseBias is a boolean that tells if the layer uses bias
 	UsesBias bool
-	// Outputs
-	Outputs *[]float64
 	// The Name of the Inputlayer
 	InputLayername string
 	// Layer that delivers Data to this Layer
@@ -55,12 +53,6 @@ func (d *Dense) InitWeights() {
 	// TODO: fill with random Numbers
 }
 
-// ForwardPropagate - Forward propagate the input through the layer
-func (d *Dense) Compute() {
-	// TBD
-	return
-}
-
 // Get all the weights of the layer
 func (d *Dense) GetWeights() *[][]float64 {
 	return d.Weights
@@ -86,9 +78,9 @@ func (d *Dense) UseBias() bool {
 	return d.UsesBias
 }
 
-// Get the Outputs of the layer
+// Calculate the output of the layer
 func (d *Dense) GetOutputs() any {
-	return d.Outputs
+	return nil
 }
 
 // Get the number of neurons in the layer
