@@ -23,10 +23,12 @@ type Dense struct {
 	InputLayer *utils.Layer
 	// The Communication Channel
 	Com chan utils.Payload
+	// Function to init the weights
+	InitWeightsFunction func() float64
 }
 
 // Create new Dense Layer and return it
-func NewDense(neurons int64, activation func(any) any, bias bool, name string, dropout float64, lb *utils.Layer, com chan utils.Payload) *Dense {
+func NewDense(neurons int64, activation func(any) any, bias bool, name string, dropout float64, lb *utils.Layer, com chan utils.Payload, initweightsfunction func() float64) *Dense {
 	// if bias is true we have to increase the number of neurons by 1
 	if bias {
 		neurons++
@@ -34,12 +36,13 @@ func NewDense(neurons int64, activation func(any) any, bias bool, name string, d
 
 	// Return the new Dense Layer
 	return &Dense{
-		Neurons:    neurons,
-		Activation: activation,
-		UsesBias:   bias,
-		Name:       name,
-		DropOut:    dropout,
-		Com:        com,
+		Neurons:             neurons,
+		Activation:          activation,
+		UsesBias:            bias,
+		Name:                name,
+		DropOut:             dropout,
+		Com:                 com,
+		InitWeightsFunction: initweightsfunction,
 	}
 }
 
@@ -53,7 +56,7 @@ func (d *Dense) InitWeights() {
 	// Fill Weights with random Data
 	for i := range weights {
 		for j := range weights[i] {
-			weights[i][j] = utils.RandFloat64(-1, 1)
+			weights[i][j] = d.InitWeightsFunction()
 		}
 	}
 }

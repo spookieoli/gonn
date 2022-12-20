@@ -20,14 +20,15 @@ type Layer interface {
 
 // LayerConfig is a struct that holds the configuration for a layer
 type LayerConfig struct {
-	LayerType      Layer
-	Neurons        int64
-	Inputs         int64 // Inputs is optional - if not set it will be set to the number of neurons of the previous layer
-	Activation     func(any) any
-	Bias           bool
-	Name           string
-	DropOut        float64
-	InputLayerName string // The Name of the Layer delivering Data to the actual Layer, if empty it will be set to the name of the previous layer
+	LayerType           Layer
+	Neurons             int64
+	Inputs              int64 // Inputs is optional - if not set it will be set to the number of neurons of the previous layer
+	Activation          func(any) any
+	Bias                bool
+	Name                string
+	DropOut             float64
+	InputLayerName      string // The Name of the Layer delivering Data to the actual Layer, if empty it will be set to the name of the previous layer
+	InitWeightsFunction func() float64
 }
 
 // Struct to control the Training of the Model
@@ -68,7 +69,12 @@ func Work(c chan Payload) {
 	}
 }
 
-// Create Random Float64 between min and max
-func RandFloat64(min, max float64) float64 {
-	return min + rand.Float64()*(max-min)
+// Random Float returns a random number bewteen -1 and 1
+func RandFloat64() float64 {
+	return rand.Float64()*2 - 1
+}
+
+// a Function that returns random number with mean 0 and standard deviation 1
+func RandNormFloat64() float64 {
+	return rand.NormFloat64()
 }
