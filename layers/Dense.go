@@ -50,7 +50,12 @@ func (d *Dense) InitWeights() {
 	for i := range weights {
 		weights[i] = make([]float64, (*d.InputLayer).GetNeuronCount())
 	}
-	// TODO: fill with random Numbers
+	// Fill Weights with random Data
+	for i := range weights {
+		for j := range weights[i] {
+			weights[i][j] = utils.RandFloat64(-1, 1)
+		}
+	}
 }
 
 // Get all the weights of the layer

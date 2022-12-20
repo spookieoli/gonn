@@ -1,5 +1,7 @@
 package utils
 
+import "math/rand"
+
 // Interfaces - makes it possible to connect different types of layers
 type Layer interface {
 	GetWeights() *[][]float64 // Get the weights of the layer
@@ -64,4 +66,9 @@ func Work(c chan Payload) {
 	for u := range c {
 		u.Fun(u.Arg)
 	}
+}
+
+// Create Random Float64 between min and max
+func RandFloat64(min, max float64) float64 {
+	return min + rand.Float64()*(max-min)
 }
