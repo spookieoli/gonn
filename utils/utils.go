@@ -1,6 +1,9 @@
 package utils
 
-import "math/rand"
+import (
+	"math/rand"
+	"sync"
+)
 
 // Interfaces - makes it possible to connect different types of layers
 type Layer interface {
@@ -53,6 +56,7 @@ type Model interface {
 type Payload struct {
 	Fun func(any) any
 	Arg any
+	Wg  *sync.WaitGroup
 }
 
 // Struct for the Neural Network - TODO: There should be a function that applys one Neural network to another
@@ -66,6 +70,7 @@ type NeuralNetwork struct {
 func Work(c chan Payload) {
 	for u := range c {
 		u.Fun(u.Arg)
+		u.Wg.Done()
 	}
 }
 
